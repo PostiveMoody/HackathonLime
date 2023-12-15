@@ -1,4 +1,6 @@
-﻿namespace HackathonLime.Application
+﻿using HackathonLime.DTO;
+
+namespace HackathonLime.Application
 {
     public static class ApiResultExtensions
     {

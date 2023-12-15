@@ -23,6 +23,8 @@ namespace HackathonLime.Application
             builder.Services.AddDbContext<HackathonLimeDbContext>(options => 
                 options.UseNpgsql(builder.Configuration.GetConnectionString("Default")));
 
+            builder.Services.AddTransient<IConventionModelFactory, EdmModelFactory>();
+
             builder.Services.AddScoped<FilmController, FilmController>();
 
             var app = builder.Build();

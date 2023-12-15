@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace HackathonLime.Application
+namespace HackathonLime.DTO
 {
     public class PageDto<T>
     {
