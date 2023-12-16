@@ -18,6 +18,12 @@ namespace HackathonLime.Application.Controllers
             _modelFactory = modelFactory ?? throw new ArgumentNullException(nameof(modelFactory));
         }
 
+        /// <summary>
+        /// Создать фильм
+        /// </summary>
+        /// <param name="creationOptions"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
         [HttpPost]
         [Route("")]
         public ApiResult<FilmDto> Post(FilmCreationOptionsDto creationOptions)
