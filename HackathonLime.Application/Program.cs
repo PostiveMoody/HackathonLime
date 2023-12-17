@@ -20,13 +20,8 @@ namespace HackathonLime.Application
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen(options =>
-            {
-                var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-                options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
-            });
 
-            var connString = builder.Configuration["Data:ConnectionStrings:DefaultConnection"];
+            var connString = " Host=app_db;Port=5432;Database=HackathonLime;Username=postgres;Password=postgres";
 
             //Just for Debug
             if (string.IsNullOrWhiteSpace(connString))
