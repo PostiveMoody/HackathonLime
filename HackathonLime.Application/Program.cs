@@ -7,7 +7,7 @@ namespace HackathonLime.Application
 {
     public class Program
     {
-        private const string debugConnString = "Host=localhost;Port=5432;Database=HackathonLime;Username=postgres;Password=postgres";
+        private const string connectionString = "User ID=postgres;Password=postgres;Server=app_db;Port=5432;DataBase=HackathonLime;Integrated Security=true;Pooling=true";
         public static void Main(string[] args)
         {
              
@@ -30,7 +30,7 @@ namespace HackathonLime.Application
 
             //Just for Debug
             if (string.IsNullOrWhiteSpace(connString))
-                connString = debugConnString;
+                connString = connectionString;
 
             builder.Services.AddDbContext<HackathonLimeDbContext>(options => 
                 options.UseNpgsql(connString));
