@@ -2,11 +2,41 @@
 
 version: '3.4'
 
+networks:
+  deploy_dev:
+    driver: bridge
+
 services:
   hackathonlimeapplication:
     image: hackathonlimeapplication
+    depends_on:
+      - app_db
+    container_name: hackathonlimeapplication-service
+    ports:
+      - 8080:8080
     build:
       context: .
       dockerfile: HackathonLime.Application/Dockerfile
+    environment:
+      - ConnectionStrings__DefaultConnection=User ID=postgres;Password=postgres;Server=app_db;Port=5432;DataBase=HackathonLime;Integrated Security=true;Pooling=true;
+      - ASPNETCORE_URLS=http://+:8080
+    networks:
+      - deploy_dev
+    
+  app_db:
+    image: postgres:latest
+    container_name: app_db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=HackathonLime
     ports:
-      - 8080:8080
+      - 5432:5432
+    restart: always
+    volumes:
+      - app_data:/var/lib/postgresql/data
+    networks:
+      - deploy_dev
+
+volumes:
+  app_data:

@@ -1,16 +1,16 @@
-using AutoMapper;
 using HackathonLime.Application.Controllers;
 using HackathonLime.DAL;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 using System.Reflection;
 
 namespace HackathonLime.Application
 {
     public class Program
     {
+        private const string debugConnString = "Host=localhost;Port=5432;Database=HackathonLime;Username=postgres;Password=postgres";
         public static void Main(string[] args)
         {
+             
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
@@ -26,8 +26,14 @@ namespace HackathonLime.Application
                 options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
             });
 
+            var connString = builder.Configuration["ConnectionStrings:DefaultConnection"];
+
+            //Just for Debug
+            if (string.IsNullOrWhiteSpace(connString))
+                connString = debugConnString;
+
             builder.Services.AddDbContext<HackathonLimeDbContext>(options => 
-                options.UseNpgsql(builder.Configuration.GetConnectionString("Default")));
+                options.UseNpgsql(connString));
 
             builder.Services.AddTransient<IConventionModelFactory, EdmModelFactory>();
 

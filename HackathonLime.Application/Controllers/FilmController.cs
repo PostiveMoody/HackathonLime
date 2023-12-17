@@ -25,8 +25,7 @@ namespace HackathonLime.Application.Controllers
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
         [HttpPost]
-        [Route("")]
-        public ApiResult<FilmDto> Post(FilmCreationOptionsDto creationOptions)
+        public ApiResult<FilmDto> Post([FromBody]FilmCreationOptionsDto creationOptions)
         {
             if(creationOptions == null)
                 throw new ArgumentNullException(nameof(creationOptions));
