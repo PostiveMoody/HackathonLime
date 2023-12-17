@@ -26,7 +26,7 @@ namespace HackathonLime.Application
                 options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
             });
 
-            var connString = builder.Configuration["ConnectionStrings:DefaultConnection"];
+            var connString = builder.Configuration["Data:ConnectionStrings:DefaultConnection"];
 
             //Just for Debug
             if (string.IsNullOrWhiteSpace(connString))
